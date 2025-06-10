@@ -1,5 +1,5 @@
 {
-  "name": "@anil-brd/sdk",
+  "name": "anil-brd-typescript-sdk",
   "version": "1.0.0",
   "description": "TypeScript SDK for Bright Data APIs - Web Unlocker, SERP, and Scraper APIs",
   "main": "dist/index.js",

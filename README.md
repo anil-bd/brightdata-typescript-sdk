@@ -13,13 +13,15 @@ Official TypeScript/JavaScript SDK for Bright Data APIs. Currently supports Web 
 
 ## Installation
 
+(anil-brd-typescript-sdk)[https://www.npmjs.com/package/anil-brd-typescript-sdk]
+
 ```bash
-npm install @brightdata/sdk
+npm install anil-brd-typescript-sdk
 ```
 
 ## Quick start
 ```Javascript 
-import { BrightDataClient } from '@brightdata/sdk';
+import { BrightDataClient } from '@anil-brd-typescript-sdk';
 
 const client = new BrightDataClient('your-api-key', zone: 'web_unlocker1');
 
@@ -52,7 +54,7 @@ const result = await client.webUnlocker.unlock('https://example.com', {
 ### Error Handling
 ```Javascript 
 
-import { BrightDataError } from '@brightdata/sdk';
+import { BrightDataError } from 'anil-brd-typescript-sdk';
 
 try {
   const result = await client.webUnlocker.unlock('https://example.com');

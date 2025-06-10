@@ -8,10 +8,8 @@ Official TypeScript/JavaScript SDK for Bright Data APIs. Currently supports Web 
 ## Features
 
 - 🔓 **Web Unlocker API** - Bypass anti-bot measures and access any website
-- 🛡️ **Built-in Error Handling** - Comprehensive error handling and retries
-- 📝 **TypeScript Support** - Full TypeScript definitions included
-- 🚀 **Promise-based** - Modern async/await API
-- 🔧 **Extensible** - Designed for future Bright Data APIs
+- 🛡️ **Built-in error handling** - Comprehensive error handling and retries
+- 📝 **TypeScript support** - Full TypeScript definitions included
 
 ## Installation
 

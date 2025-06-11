@@ -6,6 +6,21 @@ export interface BrightDataConfig {
   timeout?: number;
 }
 
+// Simplified configuration for beginners
+export interface SimpleConfig {
+  apiKey?: string;
+  country?: string;
+  format?: 'raw' | 'json';
+  method?: 'GET' | 'POST';
+}
+
+// Default configuration for beginners
+export const DEFAULT_CONFIG: SimpleConfig = {
+  country: 'US',
+  format: 'raw',
+  method: 'GET'
+};
+
 // Web Unlocker types - minimal confirmed parameters
 export interface IWebUnlockerService {
   unlock(url: string, options: UnlockOptions): Promise<UnlockResponse>;
@@ -14,9 +29,9 @@ export interface IWebUnlockerService {
 export interface UnlockOptions {
   async?: boolean;
   country?: string;  // Country code for the request
-  format?: 'raw' | 'html' | 'markdown';
+  format?: 'raw' | 'json';
   method?: 'GET' | 'POST' | 'PUT' | 'DELETE';
-  data_format?: 'markdown' | 'html' | 'raw';
+  data_format?: 'markdown' | 'screenshot';
 }
 
 export interface UnlockResponse {
@@ -33,7 +48,9 @@ export class BrightDataError extends Error {
     message: string,
     public statusCode?: number,
     public response?: any,
-    public requestId?: string
+    public requestId?: string,
+    public suggestion?: string,
+    public learnMoreUrl?: string
   ) {
     super(message);
     this.name = 'BrightDataError';
@@ -54,4 +71,10 @@ export interface ApiResponse<T = any> {
   status: number;
   headers: Record<string, string>;
   requestId?: string;
-} 
+}
+
+// Export client types
+export * from './client';
+export * from './config';
+export * from './error';
+export { BrightData } from './simple-client'; 

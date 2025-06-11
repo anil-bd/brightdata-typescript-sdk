@@ -1,21 +1,8 @@
-// Main exports
-export { BrightDataClient } from './types/client';
-export type { IBrightDataClient } from './types/client';
+// Export the main BrightData class
+export { BrightData } from './types/simple-client';
 
-// Type exports
-export type {
-  BrightDataConfig,
-  UnlockOptions,
-  UnlockResponse,
-  IWebUnlockerService
-} from './types';
+// Export types and utilities
+export * from './types';
 
-// Error exports
-export { BrightDataError } from './types';
-
-// Service exports for advanced usage
-export { WebUnlockerService } from './types/services/web-unlocker-service';
-
-// Default export for convenience
-import { BrightDataClient } from './types/client';
-export default BrightDataClient; 
+// Export BrightData as default
+export { BrightData as default } from './types/simple-client';

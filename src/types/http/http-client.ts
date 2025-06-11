@@ -8,12 +8,11 @@ export class HttpClient {
   constructor(config: HttpClientConfig) {
     this.config = config;
     this.client = axios.create({
-      baseURL: config.baseUrl || 'https://api.brightdata.com',
-      timeout: config.timeout || 30000,
+      baseURL: 'https://api.brightdata.com', // Ensure correct base URL
+      timeout: config.timeout,
       headers: {
         'Authorization': `Bearer ${config.apiKey}`,
-        'Content-Type': 'application/json',
-        'User-Agent': config.userAgent || '@brightdata/sdk/1.0.0'
+        'Content-Type': 'application/json'
       }
     });
 
@@ -56,11 +55,35 @@ export class HttpClient {
     return `bd_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
   }
 
-  async post<T>(url: string, data?: any, config?: any): Promise<ApiResponse<T>> {
-    // Debug log for outgoing POST requests
-    console.log('[HttpClient] POST', url, JSON.stringify(data, null, 2));
-    const response = await this.client.post(url, data, config);
-    return this.formatResponse(response);
+  async post<T>(url: string, data: Record<string, any>, config?: any): Promise<ApiResponse<T>> {
+    try {
+      // Ensure data is properly formatted as JSON string
+      const requestData = JSON.stringify(data);
+      
+      const response = await this.client.post<T>(url, requestData, {
+        ...config,
+        headers: {
+          ...config?.headers,
+          'Content-Type': 'application/json'
+        }
+      });
+      
+      return {
+        data: response.data,
+        status: response.status,
+        headers: response.headers,
+        requestId: response.headers['x-request-id']
+      };
+    } catch (error: any) {
+      if (error.response) {
+        throw new BrightDataError(
+          `API request failed: ${error.response.data?.message || error.message}`,
+          error.response.status,
+          error.response.data
+        );
+      }
+      throw new BrightDataError(`Request failed: ${error.message}`);
+    }
   }
 
   async get<T>(url: string, config?: any): Promise<ApiResponse<T>> {
@@ -76,4 +99,4 @@ export class HttpClient {
       requestId: response.config?.headers?.['X-Request-ID']
     };
   }
-} 
+}

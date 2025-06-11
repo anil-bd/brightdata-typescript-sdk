@@ -21,48 +21,25 @@ npm install anil-brd-typescript-sdk
 
 ## Quick start
 ```Javascript 
-import { BrightDataClient } from '@anil-brd-typescript-sdk';
+// Create client with your API key
+const scraper = new BrightData('your-api-key');
 
-const client = new BrightDataClient('your-api-key', zone: 'web_unlocker1');
+// Basic unlocking
+const html = await scraper.getHtml('https://example.com');
+console.log(html);
 
-async function example() {
-  try {
-    const result = await client.webUnlocker.unlock('https://example.com');
-    console.log(result.content);
-  } catch (error) {
-    console.error('Error:', error.message);
-  }
-}
-```
+// Get markdown content
+const markdown = await scraper.getMarkdown('https://example.com');
+console.log(markdown);
 
-## Web Unlocker API 
+// Get screenshot
+const screenshot = await scraper.getScreenshot('https://example.com');
 
-```Javascript 
-
-// Simple unlock
-const result = await client.webUnlocker.unlock('https://example.com');
-
-// With options
-const result = await client.webUnlocker.unlock('https://example.com', {
-    country: 'US',
-    format: 'raw',
-    method: 'GET',
-    data_format: 'markdown'
+// Custom options
+const result = await scraper.unlock('https://example.com', {
+  country: 'US',
+  format: 'raw',
+  method: 'GET',
+  data_format: 'markdown'
 });
-```
-
-### Error Handling
-```Javascript 
-
-import { BrightDataError } from 'anil-brd-typescript-sdk';
-
-try {
-  const result = await client.webUnlocker.unlock('https://example.com');
-} catch (error) {
-  if (error instanceof BrightDataError) {
-    console.log('Status Code:', error.statusCode);
-    console.log('Request ID:', error.requestId);
-    console.log('Response:', error.response);
-  }
-}
 ```

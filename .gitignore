@@ -110,6 +110,17 @@ dist
 # vitepress cache directory
 **/.vitepress/cache
 
+# Output files
+output/
+*.html
+*.md
+*.json
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.pdf
+
 # Docusaurus cache and generated files
 .docusaurus
 
